@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Прогноз цен на недвижимость</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Прогноз цены недвижимости<br>в Великобритании</h1>
+
+        <form class="predict-form" method="post" action="/predict">
+            <div class="form-group">
+                <label>Тип недвижимости</label>
+                <select name="property_type" required>
+                    <option value="T">T</option>
+                    <option value="S">S</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Новое или вторичное жильё</label>
+                <div class="radio-group">
+                    <input type="radio" name="new_build" value="Y" checked> Новое
+                    <input type="radio" name="new_build" value="N"> Вторичное
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Тип владения</label>
+                <select name="duration" required>
+                    <option value="F">F</option>
+                    <option value="L">L</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Город</label>
+                <select name="city" required>
+                    <option value="London">London</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Графство</label>
+                <select name="county" required>
+                    <option value="Greater London">Greater London</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Дата сделки</label>
+                <input type="date" name="date" value="2024-04-24" required>
+            </div>
+
+            <button type="submit" class="predict-button">Рассчитать</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <div class="alert-success">
+                Ожидаемая цена: £{{ prediction }}
+            </div>
+        </div>
+        {% endif %}
+
+        <h2 style="text-align:center;">Рыночная аналитика</h2>
+        <div class="chart-section">
+            <div class="chart-container">
+                <h3>Распределение цен в городе London</h3>
+                <img src="{{ url_for('static', filename='histogram.png') }}" alt="Histogram" class="chart-img">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
