@@ -1,1 +1,2 @@
 data/pp-complete.parquet
+model/lgbm_pipeline.joblib
